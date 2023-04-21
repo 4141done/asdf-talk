@@ -27,6 +27,6 @@ jobs:
 
 
       - name: Test API
-        run: cd elixir_example && mix test
+        run: cd elixir_example && mix deps.get && mix test
         env:
           MIX_ENV: test
