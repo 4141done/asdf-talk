@@ -54,4 +54,4 @@ jobs:
 
       - name: Build docker container
         working-directory: ./elixir_example
-        run: docker built -t elixir_example .
+        run: docker build -t elixir_example .
