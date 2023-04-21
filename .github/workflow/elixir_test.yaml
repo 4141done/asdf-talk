@@ -1,0 +1,35 @@
+---
+name: Run CI/CD tests
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "elixir_example/**"
+  push:
+    branches:
+      - main
+    paths:
+      - "elixir_example/**"
+  workflow_dispatch:
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v3
+
+      - name: Read .tool-versions
+        working-directory: ./elixir_example
+        uses: erlef/setup-beam@v1
+        with:
+          version-type: strict
+          version-file: .tool-versions
+
+      - name: Test API
+        working-directory: ./elixir_example
+        run: mix test
+        env:
+          MIX_ENV: test
