@@ -114,5 +114,8 @@ nodejs 19.3.0
 The `.tool-versions` file should be checked in with your project.
 
 ## In CI
+In CI there are two approaches you can take:
+1. Use the CI tooling to install the language at a version (ie, github actions)
+2. Read the `.tool-versions` file and feed it into some other system like a docker container tag
 
 ## In Production

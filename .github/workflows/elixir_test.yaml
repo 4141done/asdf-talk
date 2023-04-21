@@ -26,7 +26,32 @@ jobs:
           version-file: ./elixir_example/.tool-versions
 
 
-      - name: Test API
+      - name: Run Tests
         run: cd elixir_example && mix deps.get && mix test
         env:
           MIX_ENV: test
+
+  build:
+    name: Build
+    runs-on: ubuntu-22.04
+    needs: test
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v3
+
+      - name: Set up Erlang and Elixir
+        uses: erlef/setup-beam@v1.15.3
+        with:
+          version-type: strict
+          version-file: ./elixir_example/.tool-versions
+
+
+      - name: Build release
+        run: cd elixir_example && mix deps.get && mix release --overwrite
+        env:
+          MIX_ENV: prod
+
+      - name: Build docker container
+        working-directory: ./elixir_example
+        run: docker built -t elixir_example .

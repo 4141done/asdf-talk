@@ -7,7 +7,7 @@ defmodule ElixirExample.JackfruitTest do
     alias ElixirExample.Jackfruit.Fact
 
     test "gives back a fact" do
-      assert [] = Jackfruit.random_fact()
+      assert %Fact{} = Jackfruit.random_fact()
     end
   end
 end

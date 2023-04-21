@@ -1,3 +1,8 @@
 FROM ubuntu:23.04
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends
+RUN mkdir /app
+WORKDIR /app
+ENV MIX_ENV=prod
+
+COPY _build/prod/rel/elixir_example .
+
+CMD ["/app/bin/elixir_example", "start"]
