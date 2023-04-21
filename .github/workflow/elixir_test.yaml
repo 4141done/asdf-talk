@@ -2,8 +2,6 @@
 name: Run CI/CD tests
 on:
   pull_request:
-    branches:
-      - main
     paths:
       - "elixir_example/**"
   push:
