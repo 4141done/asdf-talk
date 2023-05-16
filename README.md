@@ -94,3 +94,4 @@ In CI there are two approaches you can take:
 2. Read the `.tool-versions` file and feed it into some other system like a docker container tag
 
 ## In Production
+Since we assume that your CI process produces a docker container as an artifact, no changes are necessary in production.  However, the `.tool-versions` file in git for a given release SHA can be referenced to understand the runtime version/compiler version linked to the running code.
