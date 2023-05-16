@@ -20,6 +20,7 @@ jobs:
 
       - name: Read .tool-versions
         uses: marocchino/tool-versions-action@v1
+        id: versions
         with:
           path: ./rust_example/.tool-versions
 
