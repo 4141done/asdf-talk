@@ -16,6 +16,9 @@ jobs:
         working-directory: ./rust_example
 
     steps:
+      - name: Install curl
+        run: apt update && apt install curl
+
       - name: Check out the codebase
         uses: actions/checkout@v3
 
