@@ -1,4 +1,4 @@
-FROM bookworm-20230502-slim
+FROM debian:bookworm-20230502-slim
 WORKDIR /app
 RUN apt-get update \
     && apt-get install -y dumb-init \

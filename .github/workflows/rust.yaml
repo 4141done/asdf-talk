@@ -9,7 +9,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-22.04
-    container: bookworm-20230502-slim
+    container: debian:bookworm-20230502-slim
     defaults:
       run:
         shell: bash
