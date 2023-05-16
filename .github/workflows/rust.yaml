@@ -1,0 +1,35 @@
+---
+name: Run CI/CD tests
+on:
+  pull_request:
+    paths:
+      - "rust_example/**"
+  workflow_dispatch:
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./rust_example
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v3
+
+      - name: Read .tool-versions
+        uses: marocchino/tool-versions-action@v1
+        id: versions
+
+      - name: Setup Rust
+        uses: ATiltedTree/setup-rust@v1.0.5
+        with:
+          rust-version: ${{ steps.versions.outputs.rust }}
+
+      - name: Build release
+        run: cargo build --release
+
+      - name: Build docker container
+        run: docker build -f Dockerfile.ghactions -t rust_example .
+

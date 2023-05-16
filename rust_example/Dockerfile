@@ -11,7 +11,7 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-COPY --from=build /app/target/release/hello_rust ./
+COPY --from=build /app/target/release/rust_example ./
 EXPOSE 7000
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
-CMD ["/app/hello_rust"]
+CMD ["/app/rust_example"]
