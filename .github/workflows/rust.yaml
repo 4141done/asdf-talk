@@ -53,13 +53,27 @@ jobs:
       - name: Build release
         run: cargo build --release
 
+      - name: Build and and export to docker
+        uses: docker/build-push-action@91df6b874e498451163feb47610c87c4a218c1ee
+        with:
+          context: rust_example
+          load: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          file: Dockerfile.ghactions
+
+      - name: Test
+        run: |
+          docker run --rm ${{ env.TEST_TAG }}
+
       - name: Build and push Docker image
         uses: docker/build-push-action@91df6b874e498451163feb47610c87c4a218c1ee
         with:
-          context: ./rust_example
+          context: rust_example
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           file: Dockerfile.ghactions
+
 
 
