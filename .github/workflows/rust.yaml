@@ -41,8 +41,6 @@ jobs:
 
       - name: Test
         run: |
-          apt-get update && \
-          apt-get install -y curl && \
           curl localhost:7000/hello/dang
 
 
