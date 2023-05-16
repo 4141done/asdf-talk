@@ -9,6 +9,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-22.04
+    container: bookworm-20230502-slim
     defaults:
       run:
         shell: bash
@@ -41,6 +42,6 @@ jobs:
 
       - name: Test
         run: |
-          curl localhost:7000/hello/dang
+          curl localhost:7000/hello/friend
 
 
