@@ -37,7 +37,7 @@ jobs:
 
       - name: Start container
         run: |
-          docker run --rm -p 7000:7000 rust_example
+          docker run --rm -d -p 7000:7000 rust_example
 
       - name: Test
         run: |
