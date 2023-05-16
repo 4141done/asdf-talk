@@ -24,28 +24,6 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 ### Install language dependendencies
 Some of these installations have other dependencies that you'll need to make sure to satisfy.  Let's go one by one
 
-#### Erlang
-Many of these dependencies are related to optional features such as the visual debug tool. For Ubuntu the full set is:
-
-```
-apt-get -y install build-essential autoconf m4 libncurses5-dev libwxgtk3.0-gtk3-dev libwxgtk-webview3.0-gtk3-dev libgl1-mesa-dev libglu1-mesa-dev libpng-dev libssh-dev unixodbc-dev xsltproc fop libxml2-utils libncurses-dev openjdk-11-jdk
-```
-We'll cut that set down for a production deploy.
-
-For MacOS:
-```
-brew install autoconf
-brew install openssl@1.1
-brew install wxwidgets
-brew install libxslt fop
-```
-
-#### Elixir
-Debian:
-```
-apt-get install unzip
-```
-
 #### Go
 Debian:
 ```
