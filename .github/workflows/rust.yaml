@@ -1,14 +1,22 @@
 ---
-name: Run CI/CD tests
+name: Build and push image
 on:
   pull_request:
     paths:
       - "rust_example/**"
   workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
-  build:
+  build-and-push-image:
     name: Build
     runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: write
     defaults:
       run:
         shell: bash
@@ -17,6 +25,19 @@ jobs:
     steps:
       - name: Check out the codebase
         uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
       - name: Read .tool-versions
         uses: marocchino/tool-versions-action@v1
@@ -32,6 +53,13 @@ jobs:
       - name: Build release
         run: cargo build --release
 
-      - name: Build docker container
-        run: docker build -f Dockerfile.ghactions -t rust_example .
+      - name: Build and push Docker image
+        uses: docker/build-push-action@91df6b874e498451163feb47610c87c4a218c1ee
+        with:
+          context: ./rust_example
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          file: Dockerfile.ghactions
+
 
