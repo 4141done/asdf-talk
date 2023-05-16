@@ -60,7 +60,7 @@ jobs:
           load: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          file: Dockerfile.ghactions
+          file: ./rust_example/Dockerfile.ghactions
 
       - name: Test
         run: |
@@ -69,11 +69,11 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@91df6b874e498451163feb47610c87c4a218c1ee
         with:
-          context: rust_example
+          context: ./rust_example
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          file: Dockerfile.ghactions
+          file: ./rust_example/Dockerfile.ghactions
 
 
 
