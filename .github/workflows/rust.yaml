@@ -28,7 +28,7 @@ jobs:
         with:
           rust-version: ${{ steps.versions.outputs.rust }}
 
-      - name: Build release
+      - name: Run tests
         run: cargo test
 
   build:
