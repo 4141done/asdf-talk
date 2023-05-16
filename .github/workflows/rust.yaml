@@ -6,6 +6,31 @@ on:
       - "rust_example/**"
   workflow_dispatch:
 jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-22.04
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./rust_example
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v3
+
+      - name: Read .tool-versions
+        uses: marocchino/tool-versions-action@v1
+        id: versions
+        with:
+          path: ./rust_example/.tool-versions
+
+      - name: Setup Rust
+        uses: ATiltedTree/setup-rust@v1.0.5
+        with:
+          rust-version: ${{ steps.versions.outputs.rust }}
+
+      - name: Run tests
+        run: cargo test
+
   build:
     name: Build
     runs-on: ubuntu-22.04
