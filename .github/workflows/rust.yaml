@@ -20,7 +20,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install curl
-        run: apt update && apt install -y curl build-essential
+        run: |
+          apt update && apt install -y curl build-essential ca-certificates gnupg
+          curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey && \
+          add-apt-repository \
+          "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+          $(lsb_release -cs) \
+          stable"
+          apt-get update && \
+          apt-get -y install docker-ce
 
       - name: Read .tool-versions
         uses: marocchino/tool-versions-action@v1

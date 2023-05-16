@@ -10,15 +10,12 @@ Follow the install instructions [here](https://asdf-vm.com/guide/getting-started
 ### Installing plugins
 For this example, we are going to use the following languages
 
-* Elixir: Because I like it and because it actually is an interesting example where two languages need to be specified
 * Go: Since it's commonly used at F5
 * Rust: Since it's a language of interest at F5
 * Javascript: Since the above three compile down to a standalone binary, as an example of a language that needs a runtime in production.
 
 
 ```
-asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
-asdf plugin-add elixir https://github.com/asdf-vm/asdf-elixir.git
 asdf plugin-add golang https://github.com/kennyp/asdf-golang.git
 asdf plugin-add rust https://github.com/asdf-community/asdf-rust.git
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
