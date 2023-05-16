@@ -54,10 +54,10 @@ jobs:
 
       - name: Start container
         run: |
-          docker run -d -p 7000:7000 rust_example
+          docker run -d -p 7000:7000 --name test_container rust_example
 
       - name: Test
         run: |
-          curl localhost:7000/hello/friend
+          curl test_container:7000/hello/friend
 
 

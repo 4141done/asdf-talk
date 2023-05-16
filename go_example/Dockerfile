@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 ##
-## STEP 2 - BUILD
+## STEP 1 - BUILD
 ##
 ARG GOLANG_VERSION
 FROM golang:${GOLANG_VERSION}-alpine AS build
