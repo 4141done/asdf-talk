@@ -1,7 +1,20 @@
 #!/bin/bash
 
 # PURPOSE
-# This tool outputs the 
+# This tool outputs the output of the closest parent `.tool-versions` file
+# as docker build args.
+#
+# For example, given a `.tool-versions` file that looks like this:
+# 
+# erlang 25.1
+# elixir 1.14.3-otp-25
+#
+# The script will produce:
+# "--build-arg ERLANG_VERSION=25.1 --build-arg ELIXIR_VERSION=1.14.3-otp-25"
+
+# USAGE
+# docker build $$(./versions.sh) -t myimage .
+
 target_file=".tool-versions"
 
 current_dir=$(pwd)
