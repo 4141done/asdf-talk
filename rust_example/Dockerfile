@@ -1,4 +1,5 @@
-FROM rust:1.68.2-slim AS build
+ARG RUST_VERSION
+FROM rust:${RUST_VERSION}-slim AS build
 WORKDIR /app
 COPY . .
 RUN cargo build --release

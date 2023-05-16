@@ -5,7 +5,6 @@
 ##
 ARG GOLANG_VERSION
 FROM golang:${GOLANG_VERSION}-alpine AS build
-RUN adduser -u 1001 -D iamuser
 WORKDIR /app
 COPY . .
 
@@ -21,6 +20,5 @@ WORKDIR /
 COPY --from=build /go_example /go_example
 COPY --from=build /etc/passwd /etc/passwd
 
-USER 1001
 EXPOSE 8000
 ENTRYPOINT ["/go_example"]
